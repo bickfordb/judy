@@ -20,13 +20,13 @@ func WriteRLE(j *Judy1, writer io.Writer) {
     if !e {
       break
     }
-    WriteUvarint(writer, i - last)
+    writeUvarint(writer, i - last)
     ones = !ones
     last = i
   }
 }
 
-func WriteUvarint(w io.Writer, x uint64) (err error) {
+func writeUvarint(w io.Writer, x uint64) (err error) {
   var buf [binary.MaxVarintLen64]byte
   n := binary.PutUvarint(buf[:], x)
   _, err = w.Write(buf[0:n])
